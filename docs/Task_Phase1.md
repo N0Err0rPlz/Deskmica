@@ -133,17 +133,21 @@ res://
 
 **具体动作**：
 - 在项目根目录初始化 Git 仓库。
-- 创建 `.gitignore` 文件，排除 Godot 缓存文件：
+- 创建 `.gitignore` 文件，按 Godot 4 官方版本控制指南排除缓存：
 
 ```
-# Godot 缓存
+# Godot 4 导入缓存（每台机器本地重建，不入库）
 .godot/
-*.import
 
 # OS 垃圾
 .DS_Store
 Thumbs.db
 ```
+
+> **说明（2026-04-12 修订）**：Godot 4 的 `*.import` 文件**必须**提交到仓库，
+> 因为它们存储每个资源的导入设置（过滤方式、压缩等），缺失会导致其他机器重新导入结果不一致。
+> 早期 Godot 3 时代的"排除 *.import"做法已过时。参考：
+> [Godot Docs — Version Control Systems](https://docs.godotengine.org/en/stable/tutorials/best_practices/version_control_systems.html)
 
 - 提交初始 Commit：`"init: Project scaffolding with directory structure"`。
 - 创建 `dev` 分支并切换到该分支。

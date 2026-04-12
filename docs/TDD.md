@@ -231,7 +231,7 @@ var events: Dictionary = {}    # { "race_weekend_q3": EventDefinition, ... }
 var quests: Dictionary = {}    # { "ub_template_001": QuestData, ... }
 var minigames: Dictionary = {} # { "precision_welding_qte": MiniGameConfig, ... }
 
-func _ready():
+func _ready() -> void:
     _scan_and_cache("res://resources/cars/", cars, "car_id")
     _scan_and_cache("res://resources/parts/", parts, "part_id")
     # ... 对每个子目录重复
@@ -693,7 +693,7 @@ signal minigame_cancelled
 
 func initialize(config: MiniGameConfig) -> void
 func start_game() -> void
-func _physics_process(delta):  # 输入检测在此处理
+func _physics_process(delta: float) -> void:  # 输入检测在此处理
 ```
 
 **拓展性保证**：新增小游戏玩法只需新建一个继承 `BaseMiniGame` 的场景/脚本 + 对应的 `MiniGameConfig.tres`，零底层改动。具体小游戏的玩法内容（如"节奏拧螺丝"、"精密切割 QTE"）由游戏设计文档定义，TDD 仅规范技术框架。
@@ -772,10 +772,16 @@ DisplayServer.window_set_flag(DisplayServer.WINDOW_FLAG_ALWAYS_ON_TOP, true)
 # 不抢夺系统输入焦点
 DisplayServer.window_set_flag(DisplayServer.WINDOW_FLAG_NO_FOCUS, true)
 
-# 透明背景
-get_window().transparent = true
-get_window().transparent_bg = true
+# 透明背景（视口层）
+get_viewport().transparent_bg = true
 ```
+
+> **重要（Godot 4 正确做法）**：
+> - 主窗口的透明能力**必须在项目设置中开启**：
+>   `display/window/size/transparent=true` 和 `display/window/per_pixel_transparency/allowed=true`。
+>   这两项已在 `project.godot` 中配置完毕，**不能**通过运行时 `get_window().transparent = true` 修改主窗口。
+> - 运行时代码只需要通过 `get_viewport().transparent_bg = true` 开启视口层的透明渲染。
+> - `transparent_bg` 是 `Viewport` 的属性，不是 `Window` 的属性。
 
 ### 7.2 窗口定位与缩放
 
@@ -967,17 +973,19 @@ void fragment() {
 
 ### 11.2 AI 协作"三步存档法"（The Vibe-Coding Commit Rule）
 
+> Commit 消息统一遵循 `CLAUDE.md` 中的 **Commit Message 规范**（Conventional Commits，type/scope 英文，subject/body 中文）。
+
 | 步骤 | 操作 | Commit 备注示例 |
 |------|------|----------------|
-| Step 1：指令前存档 | 在要求 Claude Code 进行大规模重构或编写新系统**之前**，手动提交 | `"Before asking AI to write Gacha System"` |
+| Step 1：指令前存档 | 在要求 Claude Code 进行大规模重构或编写新系统**之前**，手动提交 | `chore: 请求 AI 实现抽卡系统前的存档点` |
 | Step 2：局部测试 | AI 写完后立即在 Godot 中运行。崩溃则 `git revert` 到 Step 1，**绝不让 AI 在烂摊子上继续修补** | — |
-| Step 3：成功后封存 | 功能测试跑通后立即提交 | `"feat: Added basic Gacha logic"` |
+| Step 3：成功后封存 | 功能测试跑通后立即提交 | `feat(gacha): 新增抽卡系统基础逻辑` |
 
 ### 11.3 美术资产独立管理
 
 - 所有 Aseprite 导出的 `.png` 和 `.json` 统一存放在 `assets/` 文件夹。
 - 美术资产的 Commit **必须与代码逻辑的 Commit 分开**，保持版本记录清晰。
-- 美术 Commit 备注格式：`"art: Updated mechanic_welding spritesheet"`
+- 美术 Commit 使用 `art` type（`CLAUDE.md` 扩展类型），例如：`art(sprites): 更新 mechanic_welding 精灵图`
 
 ---
 

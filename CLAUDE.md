@@ -30,6 +30,7 @@
   - `feat` 新功能 / `fix` bug 修复 / `docs` 文档 / `style` 格式（不影响代码运行）
   - `refactor` 重构 / `perf` 性能优化 / `test` 测试 / `build` 构建系统或依赖
   - `ci` CI 配置 / `chore` 杂项 / `revert` 回滚
+  - `art` 美术资产（项目扩展，用于 Aseprite 精灵图、调色盘等资源提交，必须与代码逻辑 commit 分开）
 - **scope**（可选，英文）：影响范围，如 `core`、`save`、`ui`、`signal-bus`
 - **subject**（必须，中文）：简短描述，不加句号，祈使句式（"新增 XX" 而非 "新增了 XX"）
 - **body**（可选，中文）：空一行后书写，说明动机与细节
