@@ -1,6 +1,6 @@
 # Task.md — 第一阶段开发任务清单
 
-**项目代号**：Desktop Garage（桌面车库）
+**项目代号**：Deskmica
 **阶段**：Phase 1 — 纯净底层框架与核心数据字典
 **基准文档**：TDD.md v1.0-FINAL
 **最后更新**：2026-04-11
@@ -46,7 +46,7 @@
 - 涉及技术：Project Settings 配置。
 
 **具体动作**：
-- 创建新的 Godot 4.6.2 项目，项目名称设为 `DesktopGarage`。
+- 创建新的 Godot 4.6.2 项目，项目名称设为 `Deskmica`。
 - 在 Project Settings 中配置以下关键项：
   - `display/window/size/viewport_width` = 960
   - `display/window/size/viewport_height` = 540

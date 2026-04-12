@@ -1,7 +1,7 @@
 # CLAUDE.md — Claude Code 项目指令
 
 ## 项目概述
-本项目是一款基于 Godot 4.6.2 的 2D 像素风桌面挂机游戏（项目代号：Desktop Garage）。
+本项目是一款基于 Godot 4.6.2 的 2D 像素风桌面挂机游戏（项目代号：Deskmica）。
 编程语言为 GDScript。
 
 ## 核心文档

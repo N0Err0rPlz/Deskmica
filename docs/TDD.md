@@ -1,6 +1,6 @@
 # TDD.md — 技术设计文档（Technical Design Document）
 
-**项目代号**：Desktop Garage（桌面车库）
+**项目代号**：Deskmica
 **引擎**：Godot 4.6.2
 **语言**：GDScript
 **文档版本**：v1.0-FINAL
