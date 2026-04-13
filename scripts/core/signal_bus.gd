@@ -4,6 +4,9 @@ extends Node
 # SignalBus 内所有 signal 均由外部模块 emit，编辑器会误报 UNUSED_SIGNAL，此处整体抑制。
 @warning_ignore_start("unused_signal")
 
+func _ready() -> void:
+	print("[SignalBus] Initialized.")
+
 # === 经济与交易 ===
 signal credits_changed(new_amount: int)
 signal car_purchased(car_id: String)

@@ -6,7 +6,7 @@ var _credits: int = 0
 func _ready() -> void:
 	print("[EconomyManager] Initialized.")
 
-func update(delta: float) -> void:
+func update(_delta: float) -> void:
 	pass  # Phase 2: 挂机收益计算
 
 func get_credits() -> int:

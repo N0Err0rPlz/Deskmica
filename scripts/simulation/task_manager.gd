@@ -4,5 +4,5 @@ extends Node
 func _ready() -> void:
 	print("[TaskManager] Initialized.")
 
-func update(delta: float) -> void:
+func update(_delta: float) -> void:
 	pass  # Phase 2+: 具体业务逻辑

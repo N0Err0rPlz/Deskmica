@@ -6,7 +6,7 @@ var _tokens: Dictionary = {}  # { "normal_token": 0, "premium_token": 0 }
 func _ready() -> void:
 	print("[TokenManager] Initialized.")
 
-func update(delta: float) -> void:
+func update(_delta: float) -> void:
 	pass  # Phase 2: 在线时长累计代币
 
 func get_token_count(token_id: String) -> int:
