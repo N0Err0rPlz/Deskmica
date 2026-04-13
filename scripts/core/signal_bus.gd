@@ -1,6 +1,9 @@
 # signal_bus.gd —— 全局信号总线：集中声明跨模块通信的 Godot Signals（TDD 4.1）
 extends Node
 
+# SignalBus 内所有 signal 均由外部模块 emit，编辑器会误报 UNUSED_SIGNAL，此处整体抑制。
+@warning_ignore_start("unused_signal")
+
 # === 经济与交易 ===
 signal credits_changed(new_amount: int)
 signal car_purchased(car_id: String)
