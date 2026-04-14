@@ -52,6 +52,7 @@ func load_game() -> void:
 		var parse_result: int = json.parse(json_string)
 		if parse_result == OK:
 			_save_data = json.data
+			_apply_loaded_data()
 			SignalBus.load_completed.emit()
 			print("[SaveManager] Game loaded. Version: %s" % _save_data.get("save_version", "unknown"))
 		else:
@@ -131,3 +132,15 @@ func _collect_token_data() -> Dictionary:
 
 func _collect_settings_data() -> Dictionary:
 	return _save_data.get("settings", _get_default_save_data()["settings"])
+
+# 架构豁免：SaveManager 作为可信基础设施，直接写回 Manager 私有状态，避免为回灌暴露公共 setter。
+# Godot 的 JSON 会把 int 退化为 float，此处统一 int() 强转还原整数语义。
+func _apply_loaded_data() -> void:
+	var player_data: Dictionary = _save_data.get("player", {})
+	EconomyManager._credits = int(player_data.get("total_credits", 0))
+
+	var token_data: Dictionary = _save_data.get("tokens", {})
+	for token_id in token_data:
+		TokenManager._tokens[token_id] = int(token_data[token_id])
+
+	print("[SaveManager] Data applied to managers.")
