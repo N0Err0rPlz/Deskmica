@@ -14,9 +14,24 @@ func _ready() -> void:
 	print("[TaskManager] Initialized.")
 
 
-func update(_delta: float) -> void:
-	# Phase 2 Task 2.3 将在此填充倒计时与步骤完成派发逻辑
-	return
+func update(delta: float) -> void:
+	# 拷贝 keys 快照，防止迭代过程中 _start_next_step 修改字典
+	for car_id in _remaining_seconds.keys():
+		_remaining_seconds[car_id] = float(_remaining_seconds[car_id]) - delta
+		if float(_remaining_seconds[car_id]) <= 0.0:
+			# Peek 模型：当前步骤此刻仍留在 _queues[car_id][0]
+			var finished_step: TaskStepData = _peek_current_step(car_id)
+			SignalBus.step_completed.emit(car_id, finished_step)
+			(_queues[car_id] as Array).pop_front()  # 倒计时归零后才真正弹出
+			_start_next_step(car_id)  # 读取新的队首或发射 kit_installed
+
+
+func is_busy(car_id: String) -> bool:
+	return _remaining_seconds.has(car_id) and float(_remaining_seconds[car_id]) > 0.0
+
+
+func get_remaining(car_id: String) -> float:
+	return float(_remaining_seconds.get(car_id, 0.0))
 
 
 func _on_kit_purchased(car_id: String, kit_id: String) -> void:
@@ -38,6 +53,11 @@ func _on_kit_purchased(car_id: String, kit_id: String) -> void:
 	var idle: bool = not _remaining_seconds.has(car_id) or float(_remaining_seconds[car_id]) <= 0.0
 	if idle:
 		_start_next_step(car_id)
+
+
+func _peek_current_step(car_id: String) -> TaskStepData:
+	# 仅读取队首步骤，不改动队列；pop 时机严格由 update() 控制
+	return (_queues[car_id] as Array)[0]
 
 
 func _start_next_step(car_id: String) -> void:
