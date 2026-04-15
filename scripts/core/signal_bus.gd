@@ -12,6 +12,8 @@ signal credits_changed(new_amount: int)
 signal car_purchased(car_id: String)
 signal car_delivered(car_id: String, sell_price: int)
 signal item_purchased(item_type: String, item_id: String)
+signal car_added_to_garage(car_id: String)
+signal offline_earnings_settled(amount: int, duration_seconds: int)
 
 # === 改装流程 ===
 signal kit_purchased(car_id: String, kit_id: String)
