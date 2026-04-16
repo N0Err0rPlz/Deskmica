@@ -55,6 +55,7 @@ func load_game() -> void:
 		if parse_result == OK:
 			_save_data = json.data
 			_apply_loaded_data()
+			_settle_offline_earnings()
 			SignalBus.load_completed.emit()
 			print("[SaveManager] Game loaded. Version: %s" % _save_data.get("save_version", "unknown"))
 		else:
@@ -171,3 +172,23 @@ func _apply_loaded_data() -> void:
 	TaskManager.restore_queue_snapshot(queue_data)
 
 	print("[SaveManager] Data applied to managers.")
+
+
+func _settle_offline_earnings() -> void:
+	var last_ts: int = int(_save_data.get("last_save_timestamp", 0))
+	if last_ts <= 0:
+		return
+	var now_ts: int = int(Time.get_unix_time_from_system())
+	var duration: int = max(0, now_ts - last_ts)
+	if duration == 0:
+		return
+	var eco_config: EconomyConfig = DataRegistry.get_economy_config()
+	assert(eco_config != null, "EconomyConfig.tres missing — required for offline settlement")
+	var offline_cap: int = eco_config.offline_cap_seconds
+	var effective: int = min(duration, offline_cap)
+	var per_sec: float = EconomyManager.calculate_passive_yield_per_second()
+	var amount: int = int(floor(per_sec * float(effective)))
+	if amount > 0:
+		EconomyManager.add_credits(amount)
+	SignalBus.offline_earnings_settled.emit(amount, effective)
+	print("[SaveManager] Offline settled: +%d credits over %d s" % [amount, effective])
