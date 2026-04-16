@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="TemplateGuide" load_steps=2 format=3 uid="uid://template_m_mid"]
+
+[ext_resource type="Script" uid="uid://dydx78fwy3md3" path="res://scripts/systems/template_guide.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+template_id = "M-Mid"
+display_name = "中型标准"
+bbox_width = 64
+bbox_height = 36
+ground_line_y = 32
+wheel_front = Vector2i(18, 32)
+wheel_rear = Vector2i(46, 32)
+shadow_ellipse_rx = 28
+shadow_ellipse_ry = 6
+shadow_offset_y = 2
+part_anchors = {
+"front_bumper": Vector2i(8, 28),
+"rear_bumper": Vector2i(56, 28),
+"side_skirt_left": Vector2i(12, 30),
+"side_skirt_right": Vector2i(52, 30),
+"spoiler": Vector2i(32, 12),
+"hood": Vector2i(24, 16),
+"wheels_front": Vector2i(18, 32),
+"wheels_rear": Vector2i(46, 32)
+}

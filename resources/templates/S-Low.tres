@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="TemplateGuide" load_steps=2 format=3 uid="uid://template_s_low"]
+
+[ext_resource type="Script" uid="uid://dydx78fwy3md3" path="res://scripts/systems/template_guide.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+template_id = "S-Low"
+display_name = "微型/小型低矮"
+bbox_width = 56
+bbox_height = 30
+ground_line_y = 27
+wheel_front = Vector2i(14, 27)
+wheel_rear = Vector2i(42, 27)
+shadow_ellipse_rx = 24
+shadow_ellipse_ry = 5
+shadow_offset_y = 2
+part_anchors = {
+"front_bumper": Vector2i(6, 22),
+"rear_bumper": Vector2i(48, 22),
+"side_skirt_left": Vector2i(10, 25),
+"side_skirt_right": Vector2i(44, 25),
+"spoiler": Vector2i(28, 8),
+"hood": Vector2i(18, 12),
+"wheels_front": Vector2i(14, 27),
+"wheels_rear": Vector2i(42, 27)
+}
