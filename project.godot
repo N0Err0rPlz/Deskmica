@@ -22,9 +22,9 @@ SignalBus="*res://scripts/core/signal_bus.gd"
 DataRegistry="*res://scripts/core/data_registry.gd"
 SaveManager="*res://scripts/core/save_manager.gd"
 EconomyManager="*res://scripts/simulation/economy_manager.gd"
-TokenManager="*res://scripts/simulation/token_manager.gd"
-BuffManager="*res://scripts/simulation/buff_manager.gd"
 TaskManager="*res://scripts/simulation/task_manager.gd"
+BuffManager="*res://scripts/simulation/buff_manager.gd"
+TokenManager="*res://scripts/simulation/token_manager.gd"
 MainLoopManager="*res://scripts/core/main_loop_manager.gd"
 
 [display]
