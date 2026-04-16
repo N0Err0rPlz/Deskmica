@@ -40,7 +40,7 @@
 
 ## 1. Phase 1 遗留补丁与 SignalBus 扩容
 
-### - [ ] 1.1 DataRegistry 补注册 KitDefinition 扫描
+### - [x] 1.1 DataRegistry 补注册 KitDefinition 扫描
 
 **技术定位**：
 - 修改文件：`scripts/core/data_registry.gd`
@@ -70,7 +70,7 @@
 
 ---
 
-### - [ ] 1.2 新建 EconomyConfig Custom Resource 并注册到 DataRegistry
+### - [x] 1.2 新建 EconomyConfig Custom Resource 并注册到 DataRegistry
 
 **技术定位**：
 - 新建文件：`scripts/systems/economy_config.gd`
@@ -113,7 +113,7 @@
 
 ---
 
-### - [ ] 1.3 新增车库与离线收益信号
+### - [x] 1.3 新增车库与离线收益信号
 
 **技术定位**：
 - 修改文件：`scripts/core/signal_bus.gd`
@@ -136,7 +136,7 @@
 
 ## 2. TaskManager 核心逻辑实现
 
-### - [ ] 2.1 TaskManager 数据结构与队列字段
+### - [x] 2.1 TaskManager 数据结构与队列字段
 
 **技术定位**：
 - 修改文件：`scripts/simulation/task_manager.gd`
@@ -160,7 +160,7 @@
 
 ---
 
-### - [ ] 2.2 订阅 `kit_purchased` 并拆解套件入队
+### - [x] 2.2 订阅 `kit_purchased` 并拆解套件入队
 
 **技术定位**：
 - 修改文件：`scripts/simulation/task_manager.gd`
@@ -186,7 +186,7 @@
 
 ---
 
-### - [ ] 2.3 `update(delta)` 倒计时与步骤完成派发
+### - [x] 2.3 `update(delta)` 倒计时与步骤完成派发
 
 **技术定位**：
 - 修改文件：`scripts/simulation/task_manager.gd`
@@ -222,7 +222,7 @@
 
 ## 3. EconomyManager 在线挂机收益实现
 
-### - [ ] 3.1 新增车库车辆清单与全局倍率字段
+### - [x] 3.1 新增车库车辆清单与全局倍率字段
 
 **技术定位**：
 - 修改文件：`scripts/simulation/economy_manager.gd`
@@ -246,7 +246,7 @@
 
 ---
 
-### - [ ] 3.2 `update(delta)` 计算每帧产出
+### - [x] 3.2 `update(delta)` 计算每帧产出
 
 **技术定位**：
 - 修改文件：`scripts/simulation/economy_manager.gd`
@@ -289,7 +289,7 @@
 
 ## 4. SaveManager 存档字段扩容与数据回灌
 
-### - [ ] 4.1 扩容存档默认结构
+### - [x] 4.1 扩容存档默认结构
 
 **技术定位**：
 - 修改文件：`scripts/core/save_manager.gd`
@@ -326,7 +326,7 @@
 
 ---
 
-### - [ ] 4.2 数据回灌 Manager 状态
+### - [x] 4.2 数据回灌 Manager 状态
 
 **技术定位**：
 - 修改文件：`scripts/core/save_manager.gd` / `scripts/simulation/task_manager.gd` / `scripts/simulation/economy_manager.gd`
@@ -352,7 +352,7 @@
 
 ## 5. SaveManager 离线收益结算
 
-### - [ ] 5.1 计算离线时长并发放被动收益
+### - [x] 5.1 计算离线时长并发放被动收益
 
 **技术定位**：
 - 修改文件：`scripts/core/save_manager.gd`
@@ -398,7 +398,7 @@
 
 ## 6. MainLoopManager 调度接入
 
-### - [ ] 6.1 启用 TaskManager.update 调度
+### - [x] 6.1 启用 TaskManager.update 调度
 
 **技术定位**：
 - 修改文件：`scripts/core/main_loop_manager.gd`
@@ -416,7 +416,7 @@
 
 ## 7. ShopSystem 轻量接线（无 UI）
 
-### - [ ] 7.1 注册 ShopSystem 为 Autoload 并提供纯代码购买 API
+### - [x] 7.1 注册 ShopSystem 为 Autoload 并提供纯代码购买 API
 
 **技术定位**：
 - 修改文件：`scripts/systems/shop_system.gd`
@@ -464,7 +464,7 @@
 
 ## 8. 阶段验收：Phase 2 无头冒烟测试
 
-### - [ ] 8.1 准备测试用 .tres 资源
+### - [x] 8.1 准备测试用 .tres 资源
 
 **技术定位**：
 - 新建：`resources/cars/test_car_01.tres`、`resources/kits/test_kit_01.tres`、`resources/tasks/test_step_01.tres`、`resources/tasks/test_step_02.tres`
@@ -481,7 +481,7 @@
 
 ---
 
-### - [ ] 8.2 编写 Phase 2 冒烟测试脚本
+### - [x] 8.2 编写 Phase 2 冒烟测试脚本
 
 **技术定位**：
 - 新建：`scripts/tests/phase2_smoke_test.gd`
@@ -594,7 +594,7 @@
 
 ---
 
-### - [ ] 8.3 Phase 2 最终封存
+### - [x] 8.3 Phase 2 最终封存
 
 **技术定位**：
 - Git 操作。
