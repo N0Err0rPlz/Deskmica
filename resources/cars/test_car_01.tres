@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="CarDefinition" load_steps=2 format=3 uid="uid://test_car_01"]
+
+[ext_resource type="Script" uid="uid://bqyc5c72dx1qu" path="res://scripts/systems/car_definition.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+car_id = "test_car_01"
+display_name = "Test Car 01"
+brand = "test"
+base_value = 10
+purchase_price = 100
+part_slots = PackedStringArray()
+sprite_path = ""
+palette_id = ""
