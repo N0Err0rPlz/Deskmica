@@ -11,3 +11,8 @@ extends Resource
 @export var buff_id: String = ""
 @export var set_id: String = ""
 @export var rarity_tag: String = "common"
+
+# === Phase 3 新增：美术资产关联 ===
+@export var sprite_path: String = ""                       # 配件 Sprite PNG 路径
+@export var anchor_mode: String = "top_left"               # "top_left" 或 "center"
+@export var compatible_templates: PackedStringArray = []   # 适用的模板 ID 列表
