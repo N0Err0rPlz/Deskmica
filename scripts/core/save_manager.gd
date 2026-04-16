@@ -26,6 +26,8 @@ func save_game() -> void:
 	# Phase 2+: 各管理器将自己的数据写入 _save_data
 	_save_data["player"] = _collect_player_data()
 	_save_data["tokens"] = _collect_token_data()
+	_save_data["garage"] = _collect_garage_data()
+	_save_data["active_task_queue"] = _collect_task_queue_data()
 	_save_data["settings"] = _collect_settings_data()
 
 	var json_string: String = JSON.stringify(_save_data, "  ")
@@ -129,6 +131,21 @@ func _collect_player_data() -> Dictionary:
 func _collect_token_data() -> Dictionary:
 	# 架构豁免：SaveManager 作为可信基础设施，直接读取 TokenManager 私有状态以便序列化。
 	return TokenManager._tokens.duplicate()
+
+# 架构豁免：SaveManager 直接读取 EconomyManager._garage_car_ids 组装存档结构。
+func _collect_garage_data() -> Array:
+	var garage: Array = []
+	for car_id in EconomyManager._garage_car_ids:
+		garage.append({
+			"car_id": car_id,
+			"installed_kit_ids": [],  # Phase 2 暂无配件跟踪，预留字段
+		})
+	return garage
+
+
+func _collect_task_queue_data() -> Array:
+	return TaskManager.export_queue_snapshot()
+
 
 func _collect_settings_data() -> Dictionary:
 	return _save_data.get("settings", _get_default_save_data()["settings"])

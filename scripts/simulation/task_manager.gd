@@ -34,6 +34,27 @@ func get_remaining(car_id: String) -> float:
 	return float(_remaining_seconds.get(car_id, 0.0))
 
 
+func export_queue_snapshot() -> Array:
+	# 导出当前所有车辆的任务队列快照，用于存档序列化。
+	# 仅写 step_id 字符串，绝不序列化 Resource 本体。
+	var snapshot: Array = []
+	for car_id in _queues:
+		var queue: Array[TaskStepData] = _queues[car_id]
+		if queue.is_empty() and not _active_kits.has(car_id):
+			continue
+		var pending_ids: Array[String] = []
+		for step in queue:
+			pending_ids.append(step.step_id)
+		var entry: Dictionary = {
+			"car_id": car_id,
+			"active_kit_id": String(_active_kits.get(car_id, "")),
+			"remaining_seconds": float(_remaining_seconds.get(car_id, 0.0)),
+			"pending_step_ids": pending_ids,
+		}
+		snapshot.append(entry)
+	return snapshot
+
+
 func _on_kit_purchased(car_id: String, kit_id: String) -> void:
 	var kit_def: KitDefinition = DataRegistry.get_kit(kit_id)
 	if kit_def == null:
