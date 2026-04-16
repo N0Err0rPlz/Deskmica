@@ -12,6 +12,7 @@ var buffs: Dictionary = {}
 var events: Dictionary = {}
 var quests: Dictionary = {}
 var minigames: Dictionary = {}
+var templates: Dictionary = {}
 
 # 全局单例配置（非可枚举数据字典，固定路径加载）
 var economy_config: EconomyConfig = null
@@ -30,9 +31,10 @@ func _ready() -> void:
 	_scan_and_cache("res://resources/events/", events, "event_id")
 	_scan_and_cache("res://resources/quests/", quests, "quest_id")
 	_scan_and_cache("res://resources/minigames/", minigames, "minigame_id")
+	_scan_and_cache("res://resources/templates/", templates, "template_id")
 	_load_economy_config()
-	print("[DataRegistry] Initialized. Loaded: %d cars, %d parts, %d kits, %d sets, %d buffs. EconomyConfig: %s" % [
-		cars.size(), parts.size(), kits.size(), sets.size(), buffs.size(),
+	print("[DataRegistry] Initialized. Loaded: %d cars, %d parts, %d kits, %d sets, %d buffs, %d templates. EconomyConfig: %s" % [
+		cars.size(), parts.size(), kits.size(), sets.size(), buffs.size(), templates.size(),
 		"OK" if economy_config != null else "MISSING"
 	])
 
@@ -88,6 +90,9 @@ func get_event(id: String) -> EventDefinition:
 
 func get_minigame(id: String) -> MiniGameConfig:
 	return minigames.get(id)
+
+func get_template(id: String) -> TemplateGuide:
+	return templates.get(id)
 
 func get_economy_config() -> EconomyConfig:
 	return economy_config
