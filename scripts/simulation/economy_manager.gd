@@ -44,6 +44,15 @@ func calculate_passive_yield_per_second() -> float:
 		per_second += float(def.base_value)
 	return per_second * _global_modifier
 
+func restore_garage(ids: Array) -> void:
+	_garage_car_ids.clear()
+	for id in ids:
+		var car_id: String = String(id)
+		if car_id not in _garage_car_ids:
+			_garage_car_ids.append(car_id)
+	_yield_buffer = 0.0
+
+
 func get_credits() -> int:
 	return _credits
 

@@ -34,6 +34,37 @@ func get_remaining(car_id: String) -> float:
 	return float(_remaining_seconds.get(car_id, 0.0))
 
 
+func restore_queue_snapshot(snapshot: Array) -> void:
+	_queues.clear()
+	_remaining_seconds.clear()
+	_active_kits.clear()
+	for entry in snapshot:
+		var car_id: String = String(entry.get("car_id", ""))
+		if car_id == "":
+			continue
+		var active_kit_id: String = String(entry.get("active_kit_id", ""))
+		var remaining: float = float(entry.get("remaining_seconds", 0.0))
+		var step_ids: Array = entry.get("pending_step_ids", [])
+
+		var queue: Array[TaskStepData] = []
+		var skip_car: bool = false
+		for sid in step_ids:
+			var step: TaskStepData = DataRegistry.get_task(String(sid))
+			if step == null:
+				push_warning("[TaskManager] 存档还原跳过车辆 %s：step_id '%s' 在 DataRegistry 中不存在" % [car_id, sid])
+				skip_car = true
+				break
+			queue.append(step)
+		if skip_car:
+			continue
+
+		_queues[car_id] = queue
+		if active_kit_id != "":
+			_active_kits[car_id] = active_kit_id
+		if not queue.is_empty():
+			_remaining_seconds[car_id] = remaining
+
+
 func export_queue_snapshot() -> Array:
 	# 导出当前所有车辆的任务队列快照，用于存档序列化。
 	# 仅写 step_id 字符串，绝不序列化 Resource 本体。

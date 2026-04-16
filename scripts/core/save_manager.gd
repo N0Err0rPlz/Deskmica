@@ -160,4 +160,14 @@ func _apply_loaded_data() -> void:
 	for token_id in token_data:
 		TokenManager._tokens[token_id] = int(token_data[token_id])
 
+	# Phase 2: 回灌车库与任务队列
+	var garage_data: Array = _save_data.get("garage", [])
+	var garage_ids: Array = []
+	for entry in garage_data:
+		garage_ids.append(String(entry.get("car_id", "")))
+	EconomyManager.restore_garage(garage_ids)
+
+	var queue_data: Array = _save_data.get("active_task_queue", [])
+	TaskManager.restore_queue_snapshot(queue_data)
+
 	print("[SaveManager] Data applied to managers.")
