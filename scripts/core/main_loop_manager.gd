@@ -14,7 +14,7 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	# === 模拟层更新（严格固定顺序，顺序写死以保证跨模块依赖可预测） ===
 	EconomyManager.update(delta)
-	# TaskManager.update(delta)       # Phase 2: 接入后取消注释
+	TaskManager.update(delta)
 	# QuestManager.update(delta)      # Phase 2
 	# EventManager.update(delta)      # Phase 2
 	# BusinessManager.update(delta)   # Phase 2

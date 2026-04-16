@@ -3,6 +3,7 @@ extends Node
 
 var cars: Dictionary = {}
 var parts: Dictionary = {}
+var kits: Dictionary = {}
 var sets: Dictionary = {}
 var tasks: Dictionary = {}
 var banners: Dictionary = {}
@@ -12,9 +13,15 @@ var events: Dictionary = {}
 var quests: Dictionary = {}
 var minigames: Dictionary = {}
 
+# 全局单例配置（非可枚举数据字典，固定路径加载）
+var economy_config: EconomyConfig = null
+
+const ECONOMY_CONFIG_PATH: String = "res://resources/economy_config.tres"
+
 func _ready() -> void:
 	_scan_and_cache("res://resources/cars/", cars, "car_id")
 	_scan_and_cache("res://resources/parts/", parts, "part_id")
+	_scan_and_cache("res://resources/kits/", kits, "kit_id")
 	_scan_and_cache("res://resources/sets/", sets, "set_id")
 	_scan_and_cache("res://resources/tasks/", tasks, "step_id")
 	_scan_and_cache("res://resources/gacha/", banners, "banner_id")
@@ -23,9 +30,17 @@ func _ready() -> void:
 	_scan_and_cache("res://resources/events/", events, "event_id")
 	_scan_and_cache("res://resources/quests/", quests, "quest_id")
 	_scan_and_cache("res://resources/minigames/", minigames, "minigame_id")
-	print("[DataRegistry] Initialized. Loaded: %d cars, %d parts, %d sets, %d buffs." % [
-		cars.size(), parts.size(), sets.size(), buffs.size()
+	_load_economy_config()
+	print("[DataRegistry] Initialized. Loaded: %d cars, %d parts, %d kits, %d sets, %d buffs. EconomyConfig: %s" % [
+		cars.size(), parts.size(), kits.size(), sets.size(), buffs.size(),
+		"OK" if economy_config != null else "MISSING"
 	])
+
+func _load_economy_config() -> void:
+	if ResourceLoader.exists(ECONOMY_CONFIG_PATH):
+		economy_config = ResourceLoader.load(ECONOMY_CONFIG_PATH) as EconomyConfig
+	if economy_config == null:
+		push_warning("[DataRegistry] EconomyConfig.tres missing at %s" % ECONOMY_CONFIG_PATH)
 
 func _scan_and_cache(dir_path: String, target_dict: Dictionary, id_field: String) -> void:
 	var dir: DirAccess = DirAccess.open(dir_path)
@@ -50,6 +65,9 @@ func get_car(id: String) -> CarDefinition:
 func get_part(id: String) -> PartDefinition:
 	return parts.get(id)
 
+func get_kit(id: String) -> KitDefinition:
+	return kits.get(id)
+
 func get_set(id: String) -> SetDefinition:
 	return sets.get(id)
 
@@ -70,3 +88,6 @@ func get_event(id: String) -> EventDefinition:
 
 func get_minigame(id: String) -> MiniGameConfig:
 	return minigames.get(id)
+
+func get_economy_config() -> EconomyConfig:
+	return economy_config

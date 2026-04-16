@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="TaskStepData" load_steps=2 format=3 uid="uid://test_step_01"]
+
+[ext_resource type="Script" uid="uid://bb7k3j3fovgi8" path="res://scripts/systems/task_step_data.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+step_id = "test_step_01"
+task_tag = "bodywork"
+base_duration_seconds = 2.0
+animation_key = ""
+vfx_key = ""
+minigame_eligible = false
+minigame_config_id = ""
