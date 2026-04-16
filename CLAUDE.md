@@ -62,10 +62,11 @@
 - `chore: 统一项目代号为 Deskmica`
 
 ## 已完成阶段
-Phase 1 — 纯净底层框架与核心数据字典。
-不涉及 UI、美术、游戏玩法表现逻辑。
+Phase 1 — 纯净底层框架与核心数据字典。Tag: v0.1.0-foundation
+Phase 2 — 核心循环逻辑注入（Simulation 层）。Tag: v0.2.0-simulation
 
 ## 当前阶段
-**Phase 2 — 核心循环逻辑注入（Simulation 层）**
-此阶段目标是让 TaskManager 实现改装队列倒计时，让 EconomyManager 实现挂机收益计算与离线收益结算。
-依然绝对不涉及 UI 界面搭建、美术表现逻辑。我们需要确保后台数据推演的绝对正确。
+**Phase 3 — 视图层接入与美术管线贯通（View Layer）**
+本阶段目标是让画面"看得见"模拟层的数据：车辆分四层渲染在屏幕上、配件按锚点动态挂载、Shader 调色实时生效、窗口以桌面挂件形态运行。
+依然不涉及 NPC 动画、FSM 表现层、VFX 特效池、UI 面板、小游戏覆盖层。
+参见 docs/Task_Phase3.md。
