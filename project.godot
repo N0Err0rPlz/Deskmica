@@ -26,6 +26,7 @@ TaskManager="*res://scripts/simulation/task_manager.gd"
 BuffManager="*res://scripts/simulation/buff_manager.gd"
 TokenManager="*res://scripts/simulation/token_manager.gd"
 MainLoopManager="*res://scripts/core/main_loop_manager.gd"
+ShopSystem="*res://scripts/systems/shop_system.gd"
 
 [display]
 
