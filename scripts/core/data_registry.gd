@@ -14,6 +14,9 @@ var quests: Dictionary = {}
 var minigames: Dictionary = {}
 var templates: Dictionary = {}
 
+# Phase 3：ShaderMaterial 缓存（Task 9.2 将在 _ready 中填充加载逻辑；此处仅做字段声明供上层 getter 使用）
+var _shader_materials: Dictionary = {}
+
 # 全局单例配置（非可枚举数据字典，固定路径加载）
 var economy_config: EconomyConfig = null
 
@@ -93,6 +96,10 @@ func get_minigame(id: String) -> MiniGameConfig:
 
 func get_template(id: String) -> TemplateGuide:
 	return templates.get(id)
+
+# Phase 3：ShaderMaterial getter。Task 9.2 将注册 "palette_swap" 等键；在此之前恒返回 null，上层调用方以 null 判断作优雅降级。
+func get_shader_material(key: String) -> ShaderMaterial:
+	return _shader_materials.get(key)
 
 func get_economy_config() -> EconomyConfig:
 	return economy_config
